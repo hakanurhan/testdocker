@@ -1,0 +1,12 @@
+FROM execimage
+
+RUN apk add --no-cache nodejs yarn
+COPY ./server/package.json /server/package.json
+
+RUN cd /server && yarn install
+
+ENTRYPOINT ["/usr/bin/node","/server/index.js"]
+WORKDIR ["/server"]
+
+COPY ./server/* /server/
+
